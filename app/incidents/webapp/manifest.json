@@ -36,6 +36,9 @@
         "incidents-display": {
           "semanticObject": "incidents",
           "action": "display",
+          "title": "{{flpTitle}}",
+          "subTitle": "{{flpSubtitle}}",
+          "icon": "sap-icon://alert",
           "signature": {
             "parameters": {},
             "additionalParameters": "allowed"
