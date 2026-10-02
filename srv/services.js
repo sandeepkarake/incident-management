@@ -1,21 +1,21 @@
-import cds from '@sap/cds';
+import cds from '@sap/cds'
 
 export class ProcessorService extends cds.ApplicationService {
 
     init() {
-        this.before("UPDATE", "Incidents", (req) => this.onUpdate(req));
-        this.before("CREATE", "Incidents", (req) => this.changeUrgencyDueToSubject(req.data));
-        return super.init();
+        const { Incidents } = this.entities
+        this.before('UPDATE', Incidents, req => this.onUpdate(req))
+        this.before('CREATE', Incidents, req => this.changeUrgencyDueToSubject(req.data))
+        return super.init()
     }
 
-
     changeUrgencyDueToSubject(data) {
-        let urgent = data.title?.match(/urgent/i);
-        if (urgent) data.urgency_code = 'H';
+        const urgent = data.title?.match(/urgent/i)
+        if (urgent) data.urgency_code = 'H'
     }
 
     async onUpdate(req) {
-        let closed = await SELECT.one(1).from(req.subject).where`status.code = 'C'`
-        if (closed) req.reject`Can't modify the closed incident`;
+        const closed = await SELECT.one(1).from(req.subject).where`status.code = 'C'`
+        if (closed) req.reject(409, 'INCIDENT_CLOSED')
     }
 }

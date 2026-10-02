@@ -111,7 +111,7 @@ describe('Draft Choreography APIs', () => {
                     {},
                     { validateStatus: null }
                 )
-                expect(status).to.eql(500)
+                expect(status).to.eql(409)
                 expect(data.error.message).to.include(`Can't modify the closed incident`)
             })
         })
