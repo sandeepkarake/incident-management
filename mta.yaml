@@ -73,7 +73,8 @@ modules:
       build-result: dist
       builder: custom
       commands:
-        - npm ci
+        # dependencies are installed by the root `npm ci` (npm workspaces);
+        # running `npm ci` here would prune the root node_modules
         - npm run build
       supported-platforms:
         []
