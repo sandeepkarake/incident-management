@@ -1,6 +1,6 @@
 _schema-version: 3.3.0
 ID: incident-management
-version: 1.0.0
+version: 2.0.0
 description: "A simple CAP project."
 parameters:
   enable-parallel-deployments: true
@@ -98,7 +98,8 @@ modules:
       no-source: true
     parameters:
       content:
-        instance:
+        # subaccount level so SAP Build Work Zone's HTML5 Apps provider can discover the app
+        subaccount:
           existing_destinations_policy: update
           destinations:
             - Name: incident-management-html5-repository
