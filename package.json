@@ -4,6 +4,12 @@
   "type": "module",
   "dependencies": {
     "@cap-js/hana": "^3",
+    "@cap-js/telemetry": "^2",
+    "@grpc/grpc-js": "^1",
+    "@opentelemetry/api": "^1.9",
+    "@opentelemetry/exporter-metrics-otlp-grpc": "^0.222",
+    "@opentelemetry/exporter-trace-otlp-grpc": "^0.222",
+    "@opentelemetry/instrumentation-host-metrics": "^0.5",
     "@sap/cds": "^10",
     "@sap/xssec": "^4"
   },
@@ -40,11 +46,25 @@
       },
       "[production]": {
         "db": "hana",
-        "auth": "xsuaa"
+        "auth": "xsuaa",
+        "telemetry": {
+          "kind": "to-console",
+          "tracing": {
+            "sampler": {
+              "kind": "AlwaysOffSampler"
+            }
+          }
+        }
       },
       "destinations": true,
       "html5-repo": true,
       "workzone": true
+    },
+    "log": {
+      "levels": {
+        "sqlite": "debug",
+        "cds": "info"
+      }
     }
   },
   "private": true,

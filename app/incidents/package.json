@@ -18,6 +18,8 @@
   "scripts": {
     "deploy-config": "npx -p @sap/ux-ui5-tooling fiori add deploy-config cf",
     "build": "ui5 build --clean-dest",
-    "lint": "eslint . && ui5lint"
-  }
+    "lint": "eslint . && ui5lint",
+    "start": "ui5 serve"
+  },
+  "main": "webapp/index.html"
 }

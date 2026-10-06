@@ -28,6 +28,7 @@ modules:
       - name: incident-management-auth
       - name: incident-management-db
       - name: incident-management-destination
+      - name: incident-management-logging
 
   - name: incident-management-db-deployer
     type: hdb
@@ -153,3 +154,8 @@ resources:
     parameters:
       service: html5-apps-repo
       service-plan: app-host
+  - name: incident-management-logging
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: application-logs
+      service-plan: lite

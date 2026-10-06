@@ -1,4 +1,5 @@
 import cds from '@sap/cds'
+const LOG = cds.log('processor-service')
 
 export class ProcessorService extends cds.ApplicationService {
 
@@ -16,6 +17,9 @@ export class ProcessorService extends cds.ApplicationService {
 
     async onUpdate(req) {
         const closed = await SELECT.one(1).from(req.subject).where`status.code = 'C'`
-        if (closed) req.reject(409, 'INCIDENT_CLOSED')
+        if (closed) {
+            LOG.info(`Incident ${req.data.ID} is closed, cannot update.`)
+            req.reject(409, 'INCIDENT_CLOSED')
+        }
     }
 }
